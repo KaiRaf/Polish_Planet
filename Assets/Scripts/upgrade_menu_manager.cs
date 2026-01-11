@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class menu_manager : MonoBehaviour
+public class upgrade_menu_manager : MonoBehaviour
 {
     [SerializeField] private GameObject _upgradeMenu;
     [SerializeField] private bool isActive = false;
@@ -31,6 +31,7 @@ public class menu_manager : MonoBehaviour
         //TODON QUIET MUSIC
 
         _upgradeMenu.SetActive(true);
+        audio_manager.instance.Play("ui_select");
     }    
 
     void HideUpgradeMenu()
@@ -38,6 +39,7 @@ public class menu_manager : MonoBehaviour
         //TODON LOUDEN MUSIC
 
         _upgradeMenu.SetActive(false);
+        audio_manager.instance.Play("ui_select");
     }  
 
 
