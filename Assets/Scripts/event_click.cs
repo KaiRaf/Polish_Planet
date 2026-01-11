@@ -9,5 +9,6 @@ public class event_click : MonoBehaviour, IPointerDownHandler
     {
         Debug.Log("OnPointerDown in action");
         game_manager_script.instance.AddClick(); 
+        audio_manager.instance.PlayClick();
     }
 }
