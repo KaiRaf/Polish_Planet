@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 572b226e13f50e4418972ccec0912686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainsceneName: bruno_scene
+  mainsceneName: MainMenu
   creditSceneName: Credits
 --- !u!4 &1122941386
 Transform:

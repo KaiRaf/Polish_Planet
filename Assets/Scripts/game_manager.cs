@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class game_manager_script : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class game_manager_script : MonoBehaviour
     private List<GameObject> trees = new List<GameObject>();
     private List<GameObject> trashes = new List<GameObject>();
 
+    private int randomTrash;
+    private int randomTree;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -31,6 +34,7 @@ public class game_manager_script : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+        Time.timeScale = 1f;
     }
 
     public void Start()
@@ -54,6 +58,19 @@ public class game_manager_script : MonoBehaviour
             Debug.Log("Trash" + ++i);
 
         }
+
+        treeParent.SetActive(true);
+        trashParent.SetActive(true);
+
+        for (int i = 0; i < treeParent.transform.childCount; ++i)
+        {
+            treeParent.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < trashParent.transform.childCount; ++i)
+        {
+            trashParent.transform.GetChild(i).gameObject.SetActive(true);
+        }
     }
 
     List<GameObject> GetImmediateChildren(List<GameObject> list, GameObject parent)
@@ -66,6 +83,28 @@ public class game_manager_script : MonoBehaviour
 
 
         return list;
+    }
+
+    void Update()
+    {
+        // if (clicks == 100)
+        // {
+        //     treeParent.SetActive(false);
+        //     trashParent.SetActive(false);
+        // } else if (clicks >= 200)
+        // {
+        //     trashParent.SetActive(false);
+        //     treeParent.SetActive(true);
+        // }
+
+        randomTrash = Random.Range(0, trashParent.transform.childCount);
+        randomTree = Random.Range(0, treeParent.transform.childCount);
+
+        if (clicks >= 250)
+        {
+            Time.timeScale = 0f;
+            SceneManager.LoadScene("EndScene");
+        }
     }
 
     public void AddClick()
@@ -81,15 +120,22 @@ public class game_manager_script : MonoBehaviour
 
         clicks_counter.text = $": {clicks}";
 
-
-        if (clicks % 100 == 0)
+        if (clicks % 10 == 0)
         {
-            progress_bar.value++;
-
-            foreach (GameObject tree in trees)
+            while (!trashParent.transform.GetChild(randomTrash).gameObject.activeSelf)
             {
-                
+                Destroy(trashParent.transform.GetChild(randomTrash).gameObject);
+                break;
             }
+        }
+        if (clicks >= 80 && clicks % 10 == 0)
+        {
+            while (!treeParent.transform.GetChild(randomTree).gameObject.activeSelf)
+            {
+                treeParent.transform.GetChild(randomTree).gameObject.SetActive(true);
+                break;
+            }
+
         }
     }
 }

@@ -22,6 +22,6 @@ public class NewBehaviourScript : MonoBehaviour
 
     public void BackButton()
     {
-        SceneManager.LoadScene("bruno_scene");
+        SceneManager.LoadScene("MainMenu");
     }
 }

@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject container;
     private bool isActive = false;
+
+    void Awake()
+    {
+        Time.timeScale = 1f;
+    }
 
     void Update()
     {
@@ -28,7 +34,7 @@ public class PauseMenu : MonoBehaviour
     
     public void MainMenuButton()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("bruno_scene");
+        SceneManager.LoadScene("MainMenu");
     }
 
 }
