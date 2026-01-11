@@ -19,7 +19,7 @@ public class prop_billboard : MonoBehaviour
     {
         //find angle between tree and 0,0,0
         float angle = Vector3.Angle(new Vector3(transform.parent.parent.position.x,transform.parent.parent.position.y,0), new Vector3(0,1,0));
-        Debug.Log("current position: " + transform.parent.parent.position + ", angle: " + angle);
+        //Debug.Log("current position: " + transform.parent.parent.position + ", angle: " + angle);
 
         //if x is negative
         float orientationMult = 1f;
