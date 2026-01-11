@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Polish Planet.sln"
+    "dotnet.defaultSolution": "Polish_Planet.sln"
 }
