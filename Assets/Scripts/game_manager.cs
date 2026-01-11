@@ -118,9 +118,8 @@ public class game_manager_script : MonoBehaviour
         randomTrash = UnityEngine.Random.Range(0, trashParent.transform.childCount);
         randomTree = UnityEngine.Random.Range(0, treeParent.transform.childCount);
 
-        if (clicks >= 250)
+        if (clicks >= 10000000)
         {
-            Time.timeScale = 0f;
             SceneManager.LoadScene("EndScene");
             addCostText.text = $"Buy Bonus Clicks: " + addCost + " O2";
             multCostText.text = $"Buy Click Mult: " + multCost + " O2";
@@ -168,6 +167,7 @@ public class game_manager_script : MonoBehaviour
                 Destroy(trashParent.transform.GetChild(randomTrash).gameObject);
                 break;
             }
+            progress_bar.value++;
         }
         if (clicks >= 80 && clicks % 10 == 0)
         {
