@@ -97,6 +97,7 @@ public class audio_manager : MonoBehaviour
        int maxBound = clickSounds.Count - 1;
        int rng = UnityEngine.Random.Range(0,maxBound);
        Play(clickSounds[rng]);
+       //Debug.Log("played click");
     }
 
 }

@@ -53,4 +53,6 @@ public class game_manager_script : MonoBehaviour
             progress_bar.value++;
         }
     }
+
+    
 }

@@ -40,7 +40,12 @@ public class upgrade_menu_manager : MonoBehaviour
 
         _upgradeMenu.SetActive(false);
         audio_manager.instance.Play("ui_select");
-    }  
+    }
+
+    void BuyUpgradeId(int id)
+    {
+        
+    }
 
 
 
