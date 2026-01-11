@@ -1,0 +1,40 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class PauseMenu : MonoBehaviour
+{
+    [SerializeField] private GameObject container;
+    private bool isActive = false;
+
+    void Awake()
+    {
+        Time.timeScale = 1f;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !isActive)
+        {
+            isActive = true;
+            container.SetActive(true);
+            Time.timeScale = 0f;
+        } else if (Input.GetKeyDown(KeyCode.Escape) && isActive)
+        {
+            isActive = false;
+            container.SetActive(false);
+            Time.timeScale = 1f;
+        }
+    }
+
+    public void ResumeButton()
+    {
+        container.SetActive(false);
+            Time.timeScale = 1f;
+    }
+    
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+}

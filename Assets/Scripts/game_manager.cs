@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEditor;
 using Unity.VisualScripting;
 using System;
@@ -33,6 +34,14 @@ public class game_manager_script : MonoBehaviour
 
     [SerializeField] private Slider progress_bar;
 
+    [SerializeField] private GameObject treeParent;
+    [SerializeField] private GameObject trashParent;
+
+    private List<GameObject> trees = new List<GameObject>();
+    private List<GameObject> trashes = new List<GameObject>();
+
+    private int randomTrash;
+    private int randomTree;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -43,6 +52,7 @@ public class game_manager_script : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+        Time.timeScale = 1f;
     }
 
     public void Start()
@@ -51,11 +61,72 @@ public class game_manager_script : MonoBehaviour
         currency = 0;
         progress = 0;
 
-        addCostText.text = $"Buy Bonus Clicks: " + addCost + " O2";
-        multCostText.text = $"Buy Click Mult: " + multCost + " O2";
-        passiveCostText.text = $"Buy Passive Clicks: " + passiveCost + " O2";
+        trees = GetImmediateChildren(trees, treeParent);
+        trashes = GetImmediateChildren(trashes, trashParent);
 
-        StartCoroutine(UpdatePerSecond());
+        foreach (GameObject tree in trees)
+        {
+            int i = 0;
+            Debug.Log("Tree" + ++i);
+        }
+
+        foreach (GameObject trash in trashes)
+        {
+            int i = 0;
+            Debug.Log("Trash" + ++i);
+
+        }
+
+        treeParent.SetActive(true);
+        trashParent.SetActive(true);
+
+        for (int i = 0; i < treeParent.transform.childCount; ++i)
+        {
+            treeParent.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < trashParent.transform.childCount; ++i)
+        {
+            trashParent.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
+
+    List<GameObject> GetImmediateChildren(List<GameObject> list, GameObject parent)
+    {
+        list.Clear(); // Clear the list before repopulating
+        foreach (Transform child in parent.transform) // Iterate through the parent's transform
+        {
+            list.Add(child.gameObject);
+        }
+
+
+        return list;
+    }
+
+    void Update()
+    {
+        // if (clicks == 100)
+        // {
+        //     treeParent.SetActive(false);
+        //     trashParent.SetActive(false);
+        // } else if (clicks >= 200)
+        // {
+        //     trashParent.SetActive(false);
+        //     treeParent.SetActive(true);
+        // }
+
+        randomTrash = UnityEngine.Random.Range(0, trashParent.transform.childCount);
+        randomTree = UnityEngine.Random.Range(0, treeParent.transform.childCount);
+
+        if (clicks >= 10000000)
+        {
+            SceneManager.LoadScene("EndScene");
+            addCostText.text = $"Buy Bonus Clicks: " + addCost + " O2";
+            multCostText.text = $"Buy Click Mult: " + multCost + " O2";
+            passiveCostText.text = $"Buy Passive Clicks: " + passiveCost + " O2";
+
+            StartCoroutine(UpdatePerSecond());
+        }
     }
 
     private IEnumerator UpdatePerSecond()
@@ -84,15 +155,28 @@ public class game_manager_script : MonoBehaviour
             tempClicks = remainder;
             currency_counter.text = $": {currency}";
         }
-        
+
         Debug.Log("Clicks: " + clicks);
 
         clicks_counter.text = $": {clicks}";
 
-
-        if (clicks % 100 == 0)
+        if (clicks % 10 == 0)
         {
+            while (!trashParent.transform.GetChild(randomTrash).gameObject.activeSelf)
+            {
+                Destroy(trashParent.transform.GetChild(randomTrash).gameObject);
+                break;
+            }
             progress_bar.value++;
+        }
+        if (clicks >= 80 && clicks % 10 == 0)
+        {
+            while (!treeParent.transform.GetChild(randomTree).gameObject.activeSelf)
+            {
+                treeParent.transform.GetChild(randomTree).gameObject.SetActive(true);
+                break;
+            }
+
         }
     }
 
@@ -117,14 +201,15 @@ public class game_manager_script : MonoBehaviour
     {
         if (currency >= addCost)
         {
-            currency -= (int) addCost;
+            currency -= (int)addCost;
             addCost *= costMult;
             addCost = System.Math.Round(addCost, 2);
             costMult *= 1.1;
             addBonusClicks(1);
             addCostText.text = $"Buy Bonus Clicks: " + addCost + " O2";
             audio_manager.instance.Play("buying_upgrade");
-        } else
+        }
+        else
         {
             audio_manager.instance.Play("ui_select");
         }
@@ -134,14 +219,15 @@ public class game_manager_script : MonoBehaviour
     {
         if (currency >= multCost)
         {
-            currency -= (int) multCost;
+            currency -= (int)multCost;
             multCost *= costMult;
             multCost = System.Math.Round(multCost, 2);
             costMult *= 1.1;
             addMultClicks(1);
             multCostText.text = $"Buy Click Mult: " + multCost + " O2";
             audio_manager.instance.Play("buying_upgrade");
-        } else
+        }
+        else
         {
             audio_manager.instance.Play("ui_select");
         }
@@ -151,14 +237,15 @@ public class game_manager_script : MonoBehaviour
     {
         if (currency >= passiveCost)
         {
-            currency -= (int) passiveCost;
+            currency -= (int)passiveCost;
             passiveCost *= costMult;
             passiveCost = System.Math.Round(passiveCost, 2);
             costMult *= 1.1;
             addPassiveClicks(1);
             passiveCostText.text = $"Buy Passive Clicks: " + passiveCost + " O2";
             audio_manager.instance.Play("buying_upgrade");
-        } else
+        }
+        else
         {
             audio_manager.instance.Play("ui_select");
         }

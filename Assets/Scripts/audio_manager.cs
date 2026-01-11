@@ -32,6 +32,7 @@ public class audio_manager : MonoBehaviour
         }
 
         InitializeSounds();
+        Play("main_theme");
     }
 
     private void OnDisable()
