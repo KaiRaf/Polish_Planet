@@ -775,9 +775,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1032686754784923015, guid: a2fe63cafe696ec41a27482df1911aed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1036444642185804282, guid: a2fe63cafe696ec41a27482df1911aed, type: 3}
       propertyPath: m_Name
       value: earth_props_test
+      objectReference: {fileID: 0}
+    - target: {fileID: 1082360451530157843, guid: a2fe63cafe696ec41a27482df1911aed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413090077381926894, guid: a2fe63cafe696ec41a27482df1911aed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2720841737513699853, guid: a2fe63cafe696ec41a27482df1911aed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3262175723545313717, guid: a2fe63cafe696ec41a27482df1911aed, type: 3}
       propertyPath: m_LocalPosition.x
@@ -817,6 +833,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3262175723545313717, guid: a2fe63cafe696ec41a27482df1911aed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4709257771257757129, guid: a2fe63cafe696ec41a27482df1911aed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070501724301742757, guid: a2fe63cafe696ec41a27482df1911aed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519963865724862419, guid: a2fe63cafe696ec41a27482df1911aed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323221346976264248, guid: a2fe63cafe696ec41a27482df1911aed, type: 3}
+      propertyPath: rotateSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130766708892693708, guid: a2fe63cafe696ec41a27482df1911aed, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
