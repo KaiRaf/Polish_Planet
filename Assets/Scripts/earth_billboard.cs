@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class sprite_billboard : MonoBehaviour
+public class earth_billboard : MonoBehaviour
 {
 
     [SerializeField] bool freezeXZAxis = false;
